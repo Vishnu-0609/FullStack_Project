@@ -26,6 +26,13 @@ connectDB()
 
 const app=express();
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Replace '*' with the specific origin if needed
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
+
 app.use(cors({
     origin:"https://full-stack-project-dl2k.vercel.app/",
     methods:["GET","POST"],
