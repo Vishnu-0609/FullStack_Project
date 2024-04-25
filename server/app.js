@@ -27,7 +27,7 @@ connectDB()
 const app=express();
 
 app.use(cors({
-    origin:"https://full-stack-project-dl2k.vercel.app",
+    origin:"https://full-stack-project-dl2k.vercel.app/",
     methods:["GET","POST"],
     credentials:true
 }));
@@ -47,7 +47,7 @@ const server = createServer(app);
 
 const io = new Server(server,{
     cors:{
-        origin:"https://full-stack-project-dl2k.vercel.app",
+        origin:"https://full-stack-project-dl2k.vercel.app/",
         methods:["GET","POST"],
         credentials:true
     }
