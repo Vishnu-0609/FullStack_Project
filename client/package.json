@@ -1,5 +1,6 @@
 {
   "name": "client",
+  "proxy": "https://full-stack-project-three.vercel.app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
