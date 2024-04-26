@@ -26,8 +26,15 @@ connectDB()
 
 const app=express();
 
+// app.use(cors({
+//     origin:"https://full-stack-project-bmv1.vercel.app",
+//     methods:["GET","POST"],
+//     credentials:true
+// }));
+
+
 app.use(cors({
-    origin:"https://full-stack-project-bmv1.vercel.app",
+    origin:"*",
     methods:["GET","POST"],
     credentials:true
 }));
@@ -53,9 +60,17 @@ const server = createServer(app);
 //     }
 // });  
 
+// const io = new Server(server, {
+//     cors: {
+//         origin: "https://full-stack-project-bmv1.vercel.app",
+//         methods: ["GET", "POST"],
+//         credentials: true
+//     }
+// });
+
 const io = new Server(server, {
     cors: {
-        origin: "https://full-stack-project-bmv1.vercel.app",
+        origin: "*",
         methods: ["GET", "POST"],
         credentials: true
     }
