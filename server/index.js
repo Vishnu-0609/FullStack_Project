@@ -53,7 +53,7 @@ const server = createServer(app);
 
 const io = new Server(server,{
     cors:{
-        origin:"https://full-stack-project-bmv1.vercel.app",
+        origin:"https://full-stack-project-three.vercel.app/socket.io/",
         methods:["GET","POST"],
         credentials:true
     }
