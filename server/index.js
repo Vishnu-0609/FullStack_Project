@@ -26,13 +26,29 @@ connectDB()
 
 const app=express();
 
+const server = createServer(app);
+
+const io = new Server(server,{
+    cors:{
+        origin:"https://full-stack-project-bmv1.vercel.app",
+        methods:["GET","POST"],
+        credentials:true
+    }
+}); 
+
 const corsOptions = {
     origin: "https://full-stack-project-bmv1.vercel.app",
     methods: ["GET", "POST"],
     credentials: true
 };
 
-app.use(cors(corsOptions));
+app.use(cors(corsOptions)); 
+
+// const io = new Server(server);
+
+// io.use((socket, next) => {
+//     cors(corsOptions)(socket.request, {}, next);
+// });
 
 // app.use(cors({
 //     origin:"https://full-stack-project-bmv1.vercel.app",
@@ -51,20 +67,6 @@ app.use("/api/v1/user",router);
 
 // circuit
 
-const server = createServer(app);
-const io = new Server(server);
-
-// const io = new Server(server,{
-//     cors:{
-//         origin:"https://full-stack-project-bmv1.vercel.app",
-//         methods:["GET","POST"],
-//         credentials:true
-//     }
-// });  
-
-io.use((socket, next) => {
-    cors(corsOptions)(socket.request, {}, next);
-});
 
 const defaultValue = "";
 
