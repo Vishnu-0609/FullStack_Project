@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cors({
-    origin:"https://full-stack-project-dl2k.vercel.app/",
+    origin:"https://full-stack-project-bmv1.vercel.app",
     methods:["GET","POST"],
     credentials:true
 }));
@@ -54,7 +54,7 @@ const server = createServer(app);
 
 const io = new Server(server,{
     cors:{
-        origin:"https://full-stack-project-dl2k.vercel.app/",
+        origin:"https://full-stack-project-bmv1.vercel.app",
         methods:["GET","POST"],
         credentials:true
     }
