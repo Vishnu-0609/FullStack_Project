@@ -36,19 +36,20 @@ const io = new Server(server,{
     }
 }); 
 
+// https://full-stack-project-bmv1.vercel.app
 const corsOptions = {
     origin: "https://full-stack-project-bmv1.vercel.app",
     methods: ["GET", "POST"],
     credentials: true
 };
 
+
+io.use((socket, next) => {
+    cors(corsOptions)(socket.request, {}, next);
+});
 app.use(cors(corsOptions)); 
 
 // const io = new Server(server);
-
-// io.use((socket, next) => {
-//     cors(corsOptions)(socket.request, {}, next);
-// });
 
 // app.use(cors({
 //     origin:"https://full-stack-project-bmv1.vercel.app",
