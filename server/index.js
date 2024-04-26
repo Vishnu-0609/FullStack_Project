@@ -26,13 +26,6 @@ connectDB()
 
 const app=express();
 
-// app.use(cors({
-//     origin:"https://full-stack-project-bmv1.vercel.app",
-//     methods:["GET","POST"],
-//     credentials:true
-// }));
-
-
 app.use(cors({
     origin:"https://full-stack-project-bmv1.vercel.app",
     methods:["GET","POST"],
@@ -52,19 +45,19 @@ app.use("/api/v1/user",router);
 
 const server = createServer(app);
 
-server.use(cors({
-    origin:"https://full-stack-project-bmv1.vercel.app",
-    methods:["GET","POST"],
-    credentials:true
-}));
+// server.use(cors({
+//     origin:"https://full-stack-project-bmv1.vercel.app",
+//     methods:["GET","POST"],
+//     credentials:true
+// }));
 
-// const io = new Server(server,{
-//     cors:{
-//         origin:"https://full-stack-project-bmv1.vercel.app",
-//         methods:["GET","POST"],
-//         credentials:true
-//     }
-// });  
+const io = new Server(server,{
+    cors:{
+        origin:"https://full-stack-project-bmv1.vercel.app",
+        methods:["GET","POST"],
+        credentials:true
+    }
+});  
 
 // const io = new Server(server, {
 //     cors: {
@@ -82,21 +75,21 @@ server.use(cors({
 //     }
 // });
 
-const io = new Server(server, {
-  cors: {
-    origin: function (origin, callback) {
-      // Check if the origin is in the list of allowed origins
-      const allowedOrigins = ["https://full-stack-project-bmv1.vercel.app"];
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    methods: ["GET", "POST"],
-    credentials: true
-  }
-});
+// const io = new Server(server, {
+//   cors: {
+//     origin: function (origin, callback) {
+//       // Check if the origin is in the list of allowed origins
+//       const allowedOrigins = ["https://full-stack-project-bmv1.vercel.app"];
+//       if (!origin || allowedOrigins.includes(origin)) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error("Not allowed by CORS"));
+//       }
+//     },
+//     methods: ["GET", "POST"],
+//     credentials: true
+//   }
+// });
 
 
 const defaultValue = "";
