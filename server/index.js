@@ -26,11 +26,19 @@ connectDB()
 
 const app=express();
 
-app.use(cors({
-    origin:"https://full-stack-project-bmv1.vercel.app",
-    methods:["GET","POST"],
-    credentials:true
-}));
+const corsOptions = {
+    origin: "https://full-stack-project-bmv1.vercel.app",
+    methods: ["GET", "POST"],
+    credentials: true
+};
+
+app.use(cors(corsOptions));
+
+// app.use(cors({
+//     origin:"https://full-stack-project-bmv1.vercel.app",
+//     methods:["GET","POST"],
+//     credentials:true
+// }));
 
 app.use(express.json({limit:"16kb"}))
 app.use(express.urlencoded({extended:true,limit:"16kb"}));
@@ -44,53 +52,19 @@ app.use("/api/v1/user",router);
 // circuit
 
 const server = createServer(app);
+const io = new Server(server);
 
-// server.use(cors({
-//     origin:"https://full-stack-project-bmv1.vercel.app",
-//     methods:["GET","POST"],
-//     credentials:true
-// }));
-
-const io = new Server(server,{
-    cors:{
-        origin:"https://full-stack-project-bmv1.vercel.app",
-        methods:["GET","POST"],
-        credentials:true
-    }
-});  
-
-// const io = new Server(server, {
-//     cors: {
-//         origin: "https://full-stack-project-bmv1.vercel.app",
-//         methods: ["GET", "POST"],
-//         credentials: true
+// const io = new Server(server,{
+//     cors:{
+//         origin:"https://full-stack-project-bmv1.vercel.app",
+//         methods:["GET","POST"],
+//         credentials:true
 //     }
-// });
+// });  
 
-// const io = new Server(server, {
-//     cors: {
-//         origin: "*",
-//         methods: ["GET", "POST"],
-//         credentials: true
-//     }
-// });
-
-// const io = new Server(server, {
-//   cors: {
-//     origin: function (origin, callback) {
-//       // Check if the origin is in the list of allowed origins
-//       const allowedOrigins = ["https://full-stack-project-bmv1.vercel.app"];
-//       if (!origin || allowedOrigins.includes(origin)) {
-//         callback(null, true);
-//       } else {
-//         callback(new Error("Not allowed by CORS"));
-//       }
-//     },
-//     methods: ["GET", "POST"],
-//     credentials: true
-//   }
-// });
-
+io.use((socket, next) => {
+    cors(corsOptions)(socket.request, {}, next);
+});
 
 const defaultValue = "";
 
@@ -158,17 +132,15 @@ server.listen(process.env.PORT,()=>
     console.log(`Server is running on ${process.env.PORT}`);
 });
 
-const findOrCreateDocument = async (id) =>
-{
-    if(id==null) return;
+const findOrCreateDocument = async (id) => {
+    if (!id) {
+        throw new Error("Document ID is null");
+    }
     const document = await Documentmodel.findById(id);
-
-    if(document)
-    {
+    if (document) {
         return document;
+    } else {
+        return await Documentmodel.create({ _id: id, data: defaultValue });
     }
-    else
-    {
-        return await Documentmodel.create({_id:id,data:defaultValue});
-    }
-}
+};
+
