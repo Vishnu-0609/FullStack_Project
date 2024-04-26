@@ -68,13 +68,30 @@ const server = createServer(app);
 //     }
 // });
 
+// const io = new Server(server, {
+//     cors: {
+//         origin: "*",
+//         methods: ["GET", "POST"],
+//         credentials: true
+//     }
+// });
+
 const io = new Server(server, {
-    cors: {
-        origin: "*",
-        methods: ["GET", "POST"],
-        credentials: true
-    }
+  cors: {
+    origin: function (origin, callback) {
+      // Check if the origin is in the list of allowed origins
+      const allowedOrigins = ["https://full-stack-project-bmv1.vercel.app"];
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST"],
+    credentials: true
+  }
 });
+
 
 const defaultValue = "";
 
