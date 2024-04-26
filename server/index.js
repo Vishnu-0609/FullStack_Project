@@ -45,13 +45,21 @@ app.use("/api/v1/user",router);
 
 const server = createServer(app);
 
-const io = new Server(server,{
-    cors:{
-        origin:"https://full-stack-project-bmv1.vercel.app",
-        methods:["GET","POST"],
-        credentials:true
+// const io = new Server(server,{
+//     cors:{
+//         origin:"https://full-stack-project-bmv1.vercel.app",
+//         methods:["GET","POST"],
+//         credentials:true
+//     }
+// });  
+
+const io = new Server(server, {
+    cors: {
+        origin: "https://full-stack-project-bmv1.vercel.app",
+        methods: ["GET", "POST"],
+        credentials: true
     }
-});  
+});
 
 const defaultValue = "";
 
