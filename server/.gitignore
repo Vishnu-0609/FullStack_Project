@@ -25,3 +25,5 @@ dist-ssr
 *.sw?
 
 versel.json
+.env
+.env.example
