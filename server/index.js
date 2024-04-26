@@ -34,7 +34,7 @@ const app=express();
 
 
 app.use(cors({
-    origin:"*",
+    origin:"https://full-stack-project-bmv1.vercel.app",
     methods:["GET","POST"],
     credentials:true
 }));
@@ -53,7 +53,7 @@ app.use("/api/v1/user",router);
 const server = createServer(app);
 
 server.use(cors({
-    origin:"*",
+    origin:"https://full-stack-project-bmv1.vercel.app",
     methods:["GET","POST"],
     credentials:true
 }));
