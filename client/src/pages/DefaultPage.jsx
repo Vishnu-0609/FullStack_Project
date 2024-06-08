@@ -14,7 +14,7 @@ function DefaultPage({documentName,setDocumentName}) {
 
     const getAllDocuments = async () =>
     {
-        const response = await axios.post(`https://real-time-googledocs-server.onrender.com/api/v1/user/getAllDocuments`,{
+        const response = await axios.post(`${import.meta.env.VITE_HOST_URL}/api/v1/user/getAllDocuments`,{
             "Content-Type":"application/json",
         });
         const AllDocuments = await response.data;
