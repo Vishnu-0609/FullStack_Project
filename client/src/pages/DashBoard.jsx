@@ -19,8 +19,7 @@ function DashBoard({documentName="",setDocumentName=""}) {
 
     const [socketData, setSocketData] = useState("");
 
-    // const socket = useMemo(()=>io(`${import.meta.env.VITE_HOST_URL}`,{withCredentials:true}),[]);
-    const socket = useMemo(()=>io("https://full-stack-project-three.vercel.app",{withCredentials:true}),[]);
+    const socket = useMemo(()=>io(`${import.meta.env.VITE_HOST_URL}`,{withCredentials:true}),[]);
     let mousePosition = [];
     const [mousePosition1, setMousePosition] = useState([]);
     const {id} = useParams();
